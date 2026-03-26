@@ -1,0 +1,7 @@
+{
+  "name": "笛子与清子家宴定制",
+  "description": "笛子与清子的专属家庭点菜系统，支持中餐、西餐、法餐等多种类别，温馨定制每一餐。",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}

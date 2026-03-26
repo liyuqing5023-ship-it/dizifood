@@ -1,0 +1,68 @@
+{
+  "entities": {
+    "Dish": {
+      "title": "Dish",
+      "description": "A menu item with name, description, and image.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Name of the dish" },
+        "description": { "type": "string", "description": "Description of the dish" },
+        "category": { "type": "string", "description": "Category (e.g., Breakfast, Lunch, Dinner)" },
+        "imageUrl": { "type": "string", "description": "URL of the dish image" },
+        "price": { "type": "number", "description": "Price or cost indicator" },
+        "creatorId": { "type": "string", "description": "UID of the user who added the dish" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Creation timestamp" }
+      },
+      "required": ["name", "category", "imageUrl", "creatorId", "createdAt"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "A family member's order for a meal.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "UID of the user who placed the order" },
+        "userName": { "type": "string", "description": "Display name of the user" },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "dishId": { "type": "string" },
+              "name": { "type": "string" },
+              "quantity": { "type": "number" }
+            }
+          }
+        },
+        "status": { "type": "string", "enum": ["pending", "preparing", "ready", "completed"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "userName", "items", "status", "createdAt"]
+    },
+    "User": {
+      "title": "User",
+      "description": "User profile information.",
+      "type": "object",
+      "properties": {
+        "displayName": { "type": "string" },
+        "email": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "member"] }
+      },
+      "required": ["displayName", "email"]
+    }
+  },
+  "firestore": {
+    "/dishes/{dishId}": {
+      "schema": "Dish",
+      "description": "Collection of available dishes."
+    },
+    "/orders/{orderId}": {
+      "schema": "Order",
+      "description": "Collection of meal orders."
+    },
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile data."
+    }
+  }
+}
